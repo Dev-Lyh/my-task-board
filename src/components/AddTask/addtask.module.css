@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #00000020;
+  z-index: 9;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 1.2rem 2.4rem;
+}
+
+.modal_container {
+  background-color: white;
+  height: 100%;
+  width: 40%;
+  padding: 1.2rem 2.4rem;
+  border-radius: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.6rem 0;
+}
+
+.modal_header button {
+  width: 4.4rem;
+  height: 4.4rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 1.2rem;
+  border: .1rem solid #E3E8EF;
+  background-color: #FFF;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.modal_header button:hover {
+  filter: brightness(0.9);
+  transition: all .3s ease-in-out;
+}
+
+.modal_header strong {
+  font-size: 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+}
+
+.task_name_container,
+.task_description_container {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.task_name_container label,
+.task_description_container label,
+.task_icons_container label,
+.task_status_container label {
+  font-size: 1.4rem;
+  font-family: 'DM Sans', sans-serif;
+  color: #97A3B6;
+  margin-bottom: .6rem;
+}
+
+.task_name_container input,
+.task_description_container textarea {
+  border-radius: 1.2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.6rem;
+  padding: 1rem 1.4rem;
+  width: 100%;
+  resize: none;
+  border: .1rem solid #E3E8EF;
+}
+
+.task_name_container input:focus,
+.task_description_container textarea:focus {
+  outline-color: #3662E3;
+}
+
+.flex_icons_container {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: .6rem;
+  margin-bottom: 2rem;
+}
+
+.task_icon_radio_container input[type="radio"] {
+  display: none;
+  visibility: hidden;
+}
+
+.task_icon_radio_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #E3E8EF;
+  width: 4.4rem;
+  height: 4.4rem;
+  border-radius: 1.2rem;
+}
+
+.task_icon_radio_container label {
+  margin-bottom: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.overall_status_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: .8rem;
+  column-gap: 1.2rem;
+  margin-top: .6rem;
+}
+
+.status_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  border: .2rem solid #E3E8EF;
+  padding: .2rem;
+  border-radius: 1.6rem;
+  background-color: #FFF;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+
+.status_container:hover {
+  filter: brightness(0.9);
+  transition: all .3s ease-in-out;
+}
+
+.status_label_icon_container {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.status_icon_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem;
+  width: 4.4rem;
+  height: 4.4rem;
+}
+
+.status_container p {
+  color: black;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.6rem;
+  display: flex;
+}
+
+.circle_check_status {
+  width: 2rem;
+  height: 2rem;
+  background-color: #3662E3;
+  border-radius: 1rem;
+  margin-right: 1.4rem;
+}
+
+.actions_container {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 4rem;
+}
+.actions_container div {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.actions_container div button {
+  width: 10.8rem;
+  height: 3.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .6rem;
+  border-radius: 3rem;
+  color: #FFF;
+  transition: all .3s ease-in-out;
+}
+
+.actions_container div button:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}

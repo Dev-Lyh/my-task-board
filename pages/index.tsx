@@ -6,6 +6,7 @@ import { Board } from '@/types/Board';
 import { Task } from '@/types/Task';
 import AddRouteIcon from '@/assets/icons/AddRound';
 import TaskCard from '@/components/TaskCard';
+import AddTask from '@/components/AddTask';
 
 export default function BoardPage() {
   const [board, setBoard] = useState<Board>();
@@ -44,6 +45,22 @@ export default function BoardPage() {
       status: 'NONE',
     },
   ]);
+  const [task, setTask] = useState<null | Task>(null);
+  const [isOpenModal, setIsOpenModal] = useState(true);
+
+  function handleCloseModal() {
+    setTask(null);
+    setIsOpenModal(false);
+  }
+
+  function handleOpenModal() {
+    setIsOpenModal(true);
+  }
+
+  function handleSelectTask(task: Task) {
+    setTask(task);
+    setIsOpenModal(true);
+  }
 
   return (
     <section className={styles.container}>
@@ -65,11 +82,13 @@ export default function BoardPage() {
             name={task.name}
             status={task.status}
             key={task._id}
+            onSelectTask={() => handleSelectTask(task)}
           />
         ))}
         <button
           className={`${styles.task_container} ${styles.add_task_container}`}
           style={{ backgroundColor: '#F5E8D5' }}
+          onClick={handleOpenModal}
         >
           <div className={styles.title_icon_container}>
             <div
@@ -84,6 +103,16 @@ export default function BoardPage() {
           </div>
         </button>
       </section>
+      {isOpenModal && (
+        <AddTask
+          onClose={handleCloseModal}
+          name={task === null ? '' : task.name}
+          icon={task === null ? '' : task.icon}
+          description={task === null ? '' : task.description}
+          key={task === null ? '' : task._id}
+          statusValue={task === null ? '' : task.status}
+        />
+      )}
     </section>
   );
 }
