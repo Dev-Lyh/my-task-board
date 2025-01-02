@@ -1,15 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../../firebaseConfig';
-import {
-  collection,
-  getDocs,
-  addDoc,
-  query,
-  where,
-  deleteDoc,
-  doc,
-} from 'firebase/firestore';
-import { Task } from '@/types/Task';
+import { collection, getDocs, addDoc, query, where } from 'firebase/firestore';
 
 export default async function handler(
   req: NextApiRequest,

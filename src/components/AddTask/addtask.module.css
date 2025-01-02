@@ -10,7 +10,7 @@
   height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   padding: 1.2rem 2.4rem;
 }
 
@@ -59,7 +59,7 @@
 .task_name_container,
 .task_description_container {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   margin-bottom: 2rem;
@@ -184,7 +184,7 @@
 .actions_container {
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   margin-top: 4rem;
 }
 .actions_container div {

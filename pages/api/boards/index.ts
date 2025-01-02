@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../../firebaseConfig';
-import { collection, getDocs, addDoc, deleteDoc } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 import { tasks } from '@/mocks/tasks';
 import statusOrder from '@/utils/statusOrder';
 

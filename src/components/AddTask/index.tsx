@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './addtask.module.css';
 import { icons } from '@/mocks/icons';
 import CloseRingDuotone from '@/assets/icons/CloseRingDuotone';
@@ -9,6 +9,7 @@ import CloseRingIcon from '@/assets/icons/CloseRing';
 import CheckIcon from '@/assets/icons/Check';
 import TrashIcon from '@/assets/icons/Trash';
 import { Task } from '@/types/Task';
+import Image from 'next/image';
 
 interface AddTaskProps {
   onClose(): void;
@@ -20,7 +21,7 @@ interface AddTaskProps {
   statusValue?: string;
   onAddTask(task: Task): void;
   onUpdateTask(task: Task): void;
-  onDeleteTask(_id: string):void;
+  onDeleteTask(_id: string): void;
 }
 
 export default function AddTask({
@@ -33,7 +34,7 @@ export default function AddTask({
   statusValue,
   onAddTask,
   onUpdateTask,
-  onDeleteTask
+  onDeleteTask,
 }: AddTaskProps) {
   const [iconChoosed, setIconChoosed] = useState<string>(
     icon !== undefined ? icon : 'man-technologist.png'
@@ -111,7 +112,10 @@ export default function AddTask({
             <label htmlFor="task_icon">Icon</label>
             <div className={styles.flex_icons_container}>
               {icons.map((icon) => (
-                <div className={styles.task_icon_radio_container}>
+                <div
+                  className={styles.task_icon_radio_container}
+                  key={icon._id}
+                >
                   <label
                     htmlFor={icon._id}
                     style={{
@@ -119,7 +123,7 @@ export default function AddTask({
                         iconChoosed === icon.image ? '#F5D565' : '',
                     }}
                   >
-                    <img src={`/images/${icon.image}`} alt={icon.image} />
+                    <Image width={20} height={20} src={`/images/${icon.image}`} alt={icon.image} />
                   </label>
                   <input
                     type="radio"
@@ -137,6 +141,7 @@ export default function AddTask({
             <div className={styles.overall_status_container}>
               {status.map((item) => (
                 <button
+                  key={item._id}
                   type="button"
                   className={styles.status_container}
                   onClick={() => setStatusChoosed(item.value)}

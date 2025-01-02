@@ -1,13 +1,5 @@
 import { db } from '../../../firebaseConfig';
-import {
-  doc,
-  deleteDoc,
-  getDocs,
-  collection,
-  query,
-  where,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -15,7 +7,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { id } = req.query;
-  const tasksCollections = collection(db, 'tasks');
 
   if (!id || typeof id !== 'string') {
     return res.status(400).json({ error: 'Invalid or missing ID' });
@@ -40,8 +31,8 @@ export default async function handler(
       res.status(500).json({ error });
     }
   } else if (req.method === 'DELETE') {
-    await deleteDoc(doc(db, 'tasks', id))
+    await deleteDoc(doc(db, 'tasks', id));
 
-    res.status(200).json({ id })
-  } 
+    res.status(200).json({ id });
+  }
 }

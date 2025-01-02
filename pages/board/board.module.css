@@ -3,7 +3,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   flex-direction: column;
 }
 
@@ -16,7 +16,7 @@
 .header div {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 2rem;
   margin-bottom: 1.2rem;
 }
@@ -63,7 +63,7 @@
 
 .task_container {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
   justify-content: space-between;
   padding: 1.6rem;
@@ -74,8 +74,8 @@
 
 .title_icon_container {
   display: flex;
-  align-items: start;
-  justify-content: start;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 2rem;
 }
 
@@ -93,7 +93,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .name_description_container strong {

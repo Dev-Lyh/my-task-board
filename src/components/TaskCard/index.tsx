@@ -4,14 +4,19 @@ import TimeAttackIcon from '@/assets/icons/TimeAttack';
 import DoneRoundIcon from '@/assets/icons/DoneRound';
 import CloseRingIcon from '@/assets/icons/CloseRing';
 import styles from './taskcard.module.css';
+import Image from 'next/image';
 
-interface TaskCardProps extends Task{
+interface TaskCardProps extends Task {
   onSelectTask(): void;
 }
 
-export default function TaskCard(
-  { _id, board, description, icon, name, status, onSelectTask }: TaskCardProps,
-) {
+export default function TaskCard({
+  description,
+  icon,
+  name,
+  status,
+  onSelectTask,
+}: TaskCardProps) {
   function taskContainerColor(status: string) {
     switch (status) {
       case 'IN_PROGRESS':
@@ -44,7 +49,7 @@ export default function TaskCard(
     >
       <div className={styles.title_icon_container}>
         <div className={styles.task_icon_container}>
-          <img src={`/images/${icon}`} alt="" />
+          <Image width={20} height={20} src={`/images/${icon}`} alt="" />
         </div>
         <div className={styles.name_description_container}>
           <strong>{name}</strong>

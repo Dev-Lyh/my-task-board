@@ -104,7 +104,7 @@ export default function BoardPage() {
       }),
     })
       .then((res) => res.json())
-      .then((json) => {
+      .then(() => {
         setTasks((prevState) =>
           prevState?.map((t) => (t._id === task._id ? task : t))
         );
@@ -125,7 +125,7 @@ export default function BoardPage() {
       method: 'DELETE',
     })
       .then((res) => res.json())
-      .then((json) => {
+      .then(() => {
         setTasks((prevTasks) => prevTasks?.filter((task) => task._id !== _id));
         setIsOpenModal(false);
       })
