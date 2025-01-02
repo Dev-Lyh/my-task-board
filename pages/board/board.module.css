@@ -21,14 +21,27 @@
   margin-bottom: 1.2rem;
 }
 
-.header div h1 {
+.header_title {
   font-size: 4rem;
   font-weight: 400;
+  border: 0;
+  width: 26rem;
 }
 
-.header p {
+.header_title:hover {
+  background-color: #00000030;
+  border-radius: .8rem;
+}
+
+.header_description {
   font-size: 1.6rem;
   font-weight: 400;
+  border: 0;
+}
+
+.header_description:hover {
+  background-color: #00000030;
+  border-radius: .2rem;
 }
 
 .tasks_container {
@@ -86,4 +99,42 @@
 .name_description_container strong {
   font-size: 2rem;
   margin-top: .8rem;
+}
+
+.save_board_title_button {
+  background-color: #3662E3;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  border-radius: 1.2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+    width: 72.8rem;
+  }
+
+  .tasks_container {
+    width: 72.8rem;
+  }
+}
+
+@media screen and (max-width: 745px) {
+  .header {
+    width: 52.8rem;
+  }
+
+  .tasks_container {
+    width: 52.8rem;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .header {
+    width: 32.8rem;
+  }
+
+  .tasks_container {
+    width: 32.8rem;
+  }
 }

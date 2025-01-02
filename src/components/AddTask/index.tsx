@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './addtask.module.css';
 import { icons } from '@/mocks/icons';
 import CloseRingDuotone from '@/assets/icons/CloseRingDuotone';
@@ -8,21 +8,32 @@ import DoneRoundIcon from '@/assets/icons/DoneRound';
 import CloseRingIcon from '@/assets/icons/CloseRing';
 import CheckIcon from '@/assets/icons/Check';
 import TrashIcon from '@/assets/icons/Trash';
+import { Task } from '@/types/Task';
 
 interface AddTaskProps {
   onClose(): void;
+  _id?: string;
+  board: string;
   name?: string;
   description?: string;
   icon?: string;
   statusValue?: string;
+  onAddTask(task: Task): void;
+  onUpdateTask(task: Task): void;
+  onDeleteTask(_id: string):void;
 }
 
 export default function AddTask({
   onClose,
+  _id,
+  board,
   name,
   description,
   icon,
   statusValue,
+  onAddTask,
+  onUpdateTask,
+  onDeleteTask
 }: AddTaskProps) {
   const [iconChoosed, setIconChoosed] = useState<string>(
     icon !== undefined ? icon : 'man-technologist.png'
@@ -30,8 +41,12 @@ export default function AddTask({
   const [statusChoosed, setStatusChoosed] = useState<string>(
     statusValue !== undefined ? statusValue : 'none'
   );
-  const [taskName, setTaskName] = useState<string>(name !== undefined ? name : '')
-  const [taskDescription, setTaskDescription] = useState<string>(description !== undefined ? description : '')
+  const [taskName, setTaskName] = useState<string>(
+    name !== undefined ? name : ''
+  );
+  const [taskDescription, setTaskDescription] = useState<string>(
+    description !== undefined ? description : ''
+  );
 
   function taskStatusColor(status: string) {
     switch (status) {
@@ -41,6 +56,19 @@ export default function AddTask({
         return '#32D657';
       case 'WONT_DO':
         return '#DD524C';
+    }
+  }
+
+  function taskStatusCreate(status: string) {
+    switch (status) {
+      case 'IN_PROGRESS':
+        return 'IN_PROGRESS';
+      case 'COMPLETED':
+        return 'COMPLETED';
+      case 'WONT_DO':
+        return 'WONT_DO';
+      default:
+        return 'NONE';
     }
   }
 
@@ -63,7 +91,7 @@ export default function AddTask({
               placeholder="Enter a task name"
               value={taskName}
               onChange={(e) => {
-                setTaskName(e.target.value)
+                setTaskName(e.target.value);
               }}
             />
           </div>
@@ -140,10 +168,45 @@ export default function AddTask({
         </div>
         <div className={styles.actions_container}>
           <div>
-            <button type="button" style={{ backgroundColor: '#97A3B6' }}>
+            <button
+              type="button"
+              style={{ backgroundColor: '#97A3B6' }}
+              disabled={
+                taskName.length === 0 ||
+                iconChoosed.length === 0 ||
+                statusChoosed.length === 0
+              }
+              onClick={() => _id !== undefined && onDeleteTask(_id)}
+            >
               Delete <TrashIcon />
             </button>
-            <button type="button" style={{ backgroundColor: '#3662E3' }}>
+            <button
+              type="button"
+              style={{ backgroundColor: '#3662E3' }}
+              disabled={
+                taskName.length === 0 ||
+                iconChoosed.length === 0 ||
+                statusChoosed.length === 0
+              }
+              onClick={() =>
+                _id == undefined
+                  ? onAddTask({
+                      board: board,
+                      description: taskDescription,
+                      icon: iconChoosed,
+                      name: taskName,
+                      status: taskStatusCreate(statusChoosed),
+                    })
+                  : onUpdateTask({
+                      _id: _id,
+                      board: board,
+                      description: taskDescription,
+                      icon: iconChoosed,
+                      name: taskName,
+                      status: taskStatusCreate(statusChoosed),
+                    })
+              }
+            >
               Save <CheckIcon />
             </button>
           </div>

@@ -64,3 +64,10 @@
   cursor: pointer;
   transition: all .3s ease-in-out;
 }
+
+@media screen and (max-width: 530px) {
+  .name_description_container p {
+    width: 20rem;
+  }
+  
+}

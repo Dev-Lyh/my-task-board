@@ -1,5 +1,5 @@
 export interface Task {
-  _id: string;
+  _id?: string;
   board: string;
   description: string;
   icon: string;

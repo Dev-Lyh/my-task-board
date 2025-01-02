@@ -1,5 +1,14 @@
 import { db } from '../../../firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
+import {
+  doc,
+  deleteDoc,
+  getDocs,
+  collection,
+  query,
+  where,
+  updateDoc,
+  getDoc,
+} from 'firebase/firestore';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(
@@ -7,20 +16,47 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { id } = req.query;
+  const tasksCollections = collection(db, 'tasks');
 
   if (!id || typeof id !== 'string') {
-    return res.status(400).json({ message: 'ID inválido' });
+    return res.status(400).json({ error: 'Invalid or missing ID' });
   }
 
-  const codeDoc = doc(db, 'codes', id);
-
-  if (req.method === 'GET') {
+  if (req.method === 'DELETE') {
     try {
-      const docSnapshot = await getDoc(codeDoc);
-      if (!docSnapshot.exists()) {
-        return res.status(404).json({ message: 'Code não encontrado' });
+      const q = query(tasksCollections, where('board', '==', id));
+      const snapshot = await getDocs(q);
+      const tasks = snapshot.docs.map((doc) => ({ _id: doc.id }));
+
+      for (const task of tasks) {
+        await deleteDoc(doc(db, 'tasks', task._id));
       }
-      res.status(200).json({ id, ...docSnapshot.data() });
+
+      await deleteDoc(doc(db, 'boards', id));
+
+      res.status(200).json({ id });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  } else if (req.method === 'PATCH') {
+    try {
+      const { title } = req.body;
+
+      console.log(title)
+
+      await updateDoc(doc(db, 'boards', id), {
+        title
+      });
+
+      res.status(200).json({ _id: id, title });
+    } catch (error) {
+      res.status(500).json({ error });
+    }
+  } else if (req.method === 'GET') {
+    try {
+      const boardRef = await getDoc(doc(db, 'boards', id));
+
+      res.status(200).json({ _id: boardRef.id, ...boardRef.data() });
     } catch (error) {
       res.status(500).json({ error });
     }
